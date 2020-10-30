@@ -11,4 +11,6 @@ soup.find('article').text
 
 # Collecting all articles
 text = ' '.join(map(lambda p: p.text, soup.find_all('article')))
-print(text)
+
+# Removing funny characters
+text.encode('ascil', errors = 'replace').replace("?"," ")
