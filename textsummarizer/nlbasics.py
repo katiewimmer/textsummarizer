@@ -14,60 +14,61 @@ from nltk.stem.lancaster import LancasterStemmer
 from nltk.corpus import wordnet as wn
 from nltk.wsd import lesk
 
-# Tokenizing text
-def do_tokenize():
-    text = input ("Enter your text to tokenize here: ")
-    
-    sents=sent_tokenize(text)
-    print(sents)
+class nlbasics():
 
-    words=[word_tokenize(sent) for sent in sents]
-    print(words)
+    # Tokenizing text
+    def do_tokenize(self):
+        text = input ("Enter your text to tokenize here: ")
+        
+        sents = sent_tokenize(text)
+        # print(sents)
 
-# Removing stopwords
-def do_removestopwords():
-    text = input ("Enter your text here: ")
+        words = [word_tokenize(sent) for sent in sents]
+        return words
 
-    customStopWords=set(stopwords.words('english')+list(punctuation))
-    wordsWOStopwords=[word for word in word_tokenize(text) if word not in customStopWords]
-    print(wordsWOStopwords)
+    # Removing stopwords
+    def do_removestopwords(self):
+        text = input ("Enter your text here: ")
 
-#Identifying bigrams
-def do_identifybigrams():
-    text = input ("Enter your text here: ")
+        customStopWords = set(stopwords.words('english')+list(punctuation))
+        wordsWOStopwords = [word for word in word_tokenize(text) if word not in customStopWords]
+        return wordsWOStopwords
 
-    customStopWords=set(stopwords.words('english')+list(punctuation))
-    wordsWOStopwords=[word for word in word_tokenize(text) if word not in customStopWords]
-    print(wordsWOStopwords)
-    
-    bigram_measures = nltk.collocations.BigramAssocMeasures()
-    finder = BigramCollocationFinder.from_words(wordsWOStopwords)
-    print(finder.ngram_fd.items())
+    #Identifying bigrams
+    def do_identifybigrams(self):
+        text = input ("Enter your text here: ")
 
-# Stemming
-def do_stemming():
-    text = input ("Enter your text here: ")
+        customStopWords = set(stopwords.words('english')+list(punctuation))
+        wordsWOStopwords = [word for word in word_tokenize(text) if word not in customStopWords]
+        
+        bigram_measures = nltk.collocations.BigramAssocMeasures()
+        finder = BigramCollocationFinder.from_words(wordsWOStopwords)
+        return finder.ngram_fd.items()
 
-    st = LancasterStemmer()
-    stemmedWords = [st.stem(word) for word in word_tokenize(text)]
-    print(stemmedWords)
+    # Stemming
+    def do_stemming(self):
+        text = input ("Enter your text here: ")
 
-# POS Tagging
-def do_POStagging():
-    text = input ("Enter your text here: ")
+        st = LancasterStemmer()
+        stemmedWords = [st.stem(word) for word in word_tokenize(text)]
+        return stemmedWords
 
-    tagList = nltk.pos_tag(word_tokenize(text))
-    pprint(tagList)
+    # POS Tagging
+    def do_POStagging(self):
+        text = input ("Enter your text here: ")
 
-# Disambiguating word meanings
-def do_worddisambiguation():
-    word = input ("Enter your word here: ")
-    for ss in wn.synsets(word):
-        print(ss, ss.definition())
+        tagList = nltk.pos_tag(word_tokenize(text))
+        return tagList
 
-    text2 = input ("Enter a sentence with that previous word: ")
-    contextualsentence = lesk(word_tokenize(text2), word)
-    print(contextualsentence, contextualsentence.definition())
+    # Disambiguating word meanings
+    def do_worddisambiguation(self):
+        word = input ("Enter your word here: ")
+        for ss in wn.synsets(word):
+            print(ss, ss.definition())
+
+        text2 = input ("Enter a sentence with that previous word: ")
+        contextualsentence = lesk(word_tokenize(text2), word)
+        return [contextualsentence, contextualsentence.definition()]
 
 menu = """
 1: Tokenize text
@@ -79,17 +80,20 @@ menu = """
 """
 
 print(menu)
+
+mymenu = nlbasics()
+
 choice = input ("Input your choice [1]: " )
 
 if choice == "2":
-    do_removestopwords()
+    print(mymenu.do_removestopwords())
 elif choice == "3":
-    do_identifybigrams()
+    print(mymenu.do_identifybigrams())
 elif choice == "4":
-    do_stemming()
+    print(mymenu.do_stemming())
 elif choice == "5":
-    do_POStagging()
+    print(mymenu.do_POStagging())
 elif choice == "6":
-    do_worddisambiguation()
+    print(mymenu.do_worddisambiguation())
 else:
-    do_tokenize()
+    print(mymenu.do_tokenize())
