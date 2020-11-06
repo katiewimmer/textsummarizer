@@ -70,30 +70,31 @@ class nlbasics():
         contextualsentence = lesk(word_tokenize(text2), word)
         return [contextualsentence, contextualsentence.definition()]
 
-menu = """
-1: Tokenize text
-2: Remove stopwords
-3: Find bigrams
-4: Word stemmer
-5: Part of speech tagging
-6: Word disambiguation (must enter single word)
-"""
+if __name__ == '__main__':
+    menu = """
+    1: Tokenize text
+    2: Remove stopwords
+    3: Find bigrams
+    4: Word stemmer
+    5: Part of speech tagging
+    6: Word disambiguation (must enter single word)
+    """
 
-print(menu)
+    print(menu)
 
-mymenu = nlbasics()
+    mymenu = nlbasics()
 
-choice = input ("Input your choice [1]: " )
+    choice = input ("Input your choice [1]: " )
 
-if choice == "2":
-    print(mymenu.do_removestopwords())
-elif choice == "3":
-    print(mymenu.do_identifybigrams())
-elif choice == "4":
-    print(mymenu.do_stemming())
-elif choice == "5":
-    print(mymenu.do_POStagging())
-elif choice == "6":
-    print(mymenu.do_worddisambiguation())
-else:
-    print(mymenu.do_tokenize())
+    if choice == "2":
+        print(mymenu.do_removestopwords())
+    elif choice == "3":
+        print(mymenu.do_identifybigrams())
+    elif choice == "4":
+        print(mymenu.do_stemming())
+    elif choice == "5":
+        print(mymenu.do_POStagging())
+    elif choice == "6":
+        print(mymenu.do_worddisambiguation())
+    else:
+        print(mymenu.do_tokenize())
