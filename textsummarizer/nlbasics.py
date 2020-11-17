@@ -17,10 +17,10 @@ from nltk.wsd import lesk
 class nlbasics():
 
     # Tokenizing text
-    def do_tokenize(self):
-        text = input ("Enter your text to tokenize here: ")
-        
-        sents = sent_tokenize(text)
+    def do_tokenize(self, sample):
+        # text = input ("Enter your text to tokenize here: ")
+
+        sents = sent_tokenize(sample)
         # print(sents)
 
         words = [word_tokenize(sent) for sent in sents]
@@ -40,7 +40,7 @@ class nlbasics():
 
         customStopWords = set(stopwords.words('english')+list(punctuation))
         wordsWOStopwords = [word for word in word_tokenize(text) if word not in customStopWords]
-        
+
         bigram_measures = nltk.collocations.BigramAssocMeasures()
         finder = BigramCollocationFinder.from_words(wordsWOStopwords)
         return finder.ngram_fd.items()
